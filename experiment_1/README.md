@@ -75,8 +75,6 @@ CREATE TABLE Project (
 );
 
 
-📸 **Screenshot 1:** Successful creation of tables.
-
 ---
 
 ### Step 2: Insert Records (DML Commands)
@@ -102,8 +100,6 @@ INSERT INTO Project VALUES
 (5, 'Ops Automation', '2026-02-01', '2026-08-01', 205);
 
 
-📸 **Screenshot 2:** Inserted data displayed using SELECT queries.
-
 ---
 
 ### Step 3: Data Modification
@@ -114,8 +110,6 @@ WHERE emp_id = 203;
 
 DELETE FROM Employee WHERE emp_id = 205;
 
-
-📸 **Screenshot 3:** Output after UPDATE and DELETE operations.
 
 ---
 
@@ -131,7 +125,6 @@ REVOKE INSERT ON Employee FROM HR;
 REVOKE UPDATE ON Department FROM HR;
 
 
-📸 **Screenshot 4:** Role creation and privilege assignment.
 
 ---
 
@@ -140,7 +133,7 @@ REVOKE UPDATE ON Department FROM HR;
 <br><img width="615" height="139" alt="image" src="https://github.com/user-attachments/assets/e8e8ac82-5dcb-45c3-9e7f-ff7c6262ce39" />
 <br><img width="660" height="159" alt="image" src="https://github.com/user-attachments/assets/9236c62e-2d0a-4318-bbb7-196d2573937b" />
 <br><img width="424" height="94" alt="image" src="https://github.com/user-attachments/assets/07946c7b-acf7-4777-98c4-0c14d79922bd" />
-<br><img width="436" height="97" alt="image" src="https://github.com/user-attachments/assets/6b68dba3-b635-4f5a-b4f2-4df90d96c2c9" />
+
 
 
 
