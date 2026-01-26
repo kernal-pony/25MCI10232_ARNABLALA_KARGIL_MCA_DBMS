@@ -1,68 +1,73 @@
-CREATE TABLE Department (
-    dept_id INT PRIMARY KEY,
-    dept_name VARCHAR(30) UNIQUE NOT NULL
+create table Department(
+Dept_id int primary key,
+Dept_name varchar(20) not null unique
 );
-CREATE TABLE Employee (
-    emp_id INT PRIMARY KEY,
-    emp_name VARCHAR(30) NOT NULL,
-    emp_email VARCHAR(40) UNIQUE NOT NULL,
-    emp_phone VARCHAR(15) UNIQUE NOT NULL,
-    emp_address VARCHAR(50),
-    dept_id INT,
-    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
+
+create table Employee(
+Emp_id int primary key ,
+Emp_name varchar(20)not null,
+Emp_email varchar(20) unique not null,
+Emp_phone varchar(20) unique not null,
+Dept_id int ,
+foreign key (Dept_id)references Department(Dept_id)
 );
-CREATE TABLE Project (
-    project_id INT PRIMARY KEY,
-    project_name VARCHAR(30) NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    assigned_emp INT,
-    FOREIGN KEY (assigned_emp) REFERENCES Employee(emp_id)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
+
+create table Project(
+Proj_id integer primary key,
+Proj_name varchar(20) not null,
+Proj_startDate varchar(20) not null,
+Proj_EndDate varchar(20) not null,
+Proj_Assign_Emp int,
+foreign key (Proj_Assign_Emp) references Employee(Emp_id)
 );
-INSERT INTO Department VALUES
-(10, 'Research'),
-(20, 'Development'),
-(30, 'Sales'),
-(40, 'Operations');
 
-INSERT INTO Employee VALUES
-(201, 'Arjun Das', 'arjun@gmail.com', '9001112222', 'Kolkata', 20),
-(202, 'Meera Roy', 'meera@gmail.com', '9003334444', 'Delhi', 20),
-(203, 'Sahil Khan', 'sahil@gmail.com', '9005556666', 'Mumbai', 30),
-(204, 'Nina Paul', 'nina@gmail.com', '9007778888', 'Chennai', 10),
-(205, 'Vikram Jain', 'vikram@gmail.com', '9009990000', 'Pune', 40);
+insert into Department (Dept_id,Dept_name)
+values
+(1, 'Human Resources'),
+(2, 'Engineering'),
+(3, 'Marketing'),
+(4, 'Finance');
 
+insert into Employee (Emp_id,Emp_name,Emp_email,Emp_phone,Dept_id)
+values
+(101, 'Amit Sharma', 'amit@gmail.com', '9876543210', 2),
+(102, 'Neha Verma', 'neha@gmail.com', '9123456780', 2),
+(103, 'Rohit Singh', 'rohit@gmail.com', '9988776655', 1),
+(104, 'Priya Mehta', 'priya@gmail.com', '9090909090', 3),
+(105, 'Ram Sen', 'Ram@gmail.com', '555555555', 4);
 
-INSERT INTO Project VALUES
-(1, 'Inventory System', '2026-01-05', '2026-06-30', 201),
-(2, 'CRM Software', '2026-02-10', '2026-07-15', 202),
-(3, 'Sales Dashboard', '2026-03-01', '2026-05-31', 203),
-(4, 'Research Portal', '2026-01-20', '2026-04-25', 204),
-(5, 'Ops Automation', '2026-02-01', '2026-08-01', 205);
-
-UPDATE Employee
-SET dept_id = 40
-WHERE emp_id = 203;
-
-SELECT * FROM Department;
-SELECT * FROM Employee;
-SELECT * FROM Project;
+insert into Project(Proj_id, Proj_name, Proj_startDate, Proj_EndDate, Proj_Assign_Emp)
+values
+(1, 'AI Chatbot', '2026-01-01', '2026-06-30', 101),
+(2, 'E-Commerce App', '2026-02-01', '2026-07-31', 102),
+(3, 'HR Portal', '2026-03-15', '2026-05-30', 103),
+(4, 'Marketing Website', '2026-01-20', '2026-04-20', 104);
+(5, 'Finance Website', '2025-01-20', '2026-04-20', 105);
 
 
-DELETE FROM Employee WHERE emp_id = 205;
+-- update Employee 103 Department id
+update Employee set Dept_id=4 where Emp_id=103;
+
+--delete Employee Data 
+-- But the problem is, I assign project to employee .First, i need to delete or update project .Then I  delete employee
+delete from Project where Proj_Assign_Emp=105;
+delete from Employee where Emp_id=105;
+
+select*from Department;
+
+select*from Employee;
+
+select*from Project;
 
 
-CREATE ROLE HR LOGIN PASSWORD 'HR';
+create role HOD login password 'HOD';
+grant select on Employee,Department,Project to HOD;
+grant create on schema public to HOD;
+revoke select on Department from HOD;
+revoke create on schema public from HOD;
 
 
-GRANT SELECT, INSERT, UPDATE ON Employee TO HR;
-GRANT SELECT ON Department TO HR;
-GRANT SELECT, INSERT, UPDATE ON Project TO HR;
+--alter table Employee Address
+alter table Employee add Address varchar(30);
 
-REVOKE INSERT ON Employee FROM HR;
-REVOKE UPDATE ON Department FROM HR;
-
+drop table Employee;
